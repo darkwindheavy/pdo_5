@@ -1,0 +1,726 @@
+/* Reset de estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Estilo para el body */
+body {
+    background: linear-gradient(135deg, #ececec, #f9f9f9);
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+h1, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+/* Estilo para las notificaciones de error y éxito */
+.error, .exito {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.exito {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Barra de navegación (Header) */
+nav {
+    background-color: #007bff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 15px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #0056b3;
+    border-radius: 4px;
+    transform: scale(1.05);
+}
+
+/* Estilo para el formulario */
+form {
+    display: grid;
+    grid-gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Campos del formulario */
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: all 0.3s;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+}
+
+/* Botones */
+button[type="button"], button[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    max-width: 300px;
+    margin: 10px auto;
+    display: block;
+}
+
+button[type="button"] {
+    background: #6c757d;
+    color: white;
+}
+
+button[type="submit"] {
+    background: #007bff;
+    color: white;
+}
+
+button[type="button"]:hover,
+button[type="submit"]:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: #0056b3;
+}
+
+/* Botones para acciones específicas */
+button.editar {
+    background: #28a745;
+    color: white;
+}
+
+button.borrar {
+    background: #dc3545;
+    color: white;
+    text-decoration: none;
+}
+
+button.editar:hover {
+    background: #218838;
+}
+
+button.borrar:hover {
+    background: #c82333;
+}
+
+/* Estilo de la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1rem;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background: #f1f1f1;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Efecto de resaltado al buscar */
+.highlight {
+    background: #ffeeba;
+}
+
+/* Footer centrado */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Contenedor de botones de acciones */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Caja para el botón de añadir nuevo cliente */
+.add-client {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button[type="button"].add {
+    background: #007bff;
+    color: white;
+}
+
+button[type="button"].add:hover {
+    background: #0056b3;
+}
+
+
+/* Botones para acciones específicas como enlaces estilizados */
+a.editar,
+a.borrar,
+a.add {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+a.editar {
+    background: #28a745;
+}
+
+a.borrar {
+    background: #dc3545;
+}
+
+a.add {
+    background: #007bff;
+    margin-top: 20px;
+}
+
+a.editar:hover {
+    background: #218838;
+}
+
+a.borrar:hover {
+    background: #c82333;
+}
+
+a.add:hover {
+    background: #0056b3;
+}
+
+/* Contenedor de botones de acciones */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* Barra de navegación */
+.navbar {
+    background-color: #007bff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centrar todo el contenido */
+}
+
+.navbar ul {
+    list-style: none;
+    display: inline-flex;
+    gap: 15px;
+    padding-left: 0;
+}
+
+.navbar ul li {
+    display: inline;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    background: #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.navbar ul li a:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.login-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    margin:auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor del panel */
+.dashboard-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    margin:auto;
+}
+
+/* Contenedor de botones */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Botones del panel */
+.btn-dashboard {
+    display: inline-block;
+    padding: 15px 20px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    background: #007bff;
+    cursor: pointer;
+}
+
+.btn-dashboard.logout {
+    background: #dc3545;
+}
+
+.btn-dashboard:hover {
+    background: #0056b3;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-dashboard.logout:hover {
+    background: #c82333;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de edición de usuario */
+.edit-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    margin: auto;
+}
+
+.btn-secondary {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    background: #6c757d;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.upload-success {
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #4CAF50;
+    background-color: #e9f7e9;
+    color: #4CAF50;
+    text-align: center;
+    width: 50%;
+    border-radius: 10px;
+}
+
+/* Estilo para el contenedor de botones */
+.actions-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center;     /* Alinear verticalmente */
+    gap: 10px;               /* Espacio entre botones */
+}
+
+/* Estilo para los botones */
+.actions-container a,
+.actions-container button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.actions-container a:hover,
+.actions-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Quitar subrayado del enlace (botón) */
+.actions-container a {
+    text-decoration: none;
+}
+
+/* Limitar el tamaño de las imágenes */
+.table-img {
+    max-width: 35px;
+    height: auto; /* Mantener la proporción */
+    max-height: 38px; /* Limitar la altura máxima */
+    object-fit: contain; /* Ajustar la imagen dentro de las dimensiones */
+}
+
+/* Alinear verticalmente las celdas de las filas de la tabla */
+table tbody td {
+    vertical-align: middle; /* Alinear verticalmente el contenido de cada celda */
+}
+
+/* General para centrar contenedores de botones y formularios */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente los botones */
+    align-items: center; /* Alinea verticalmente si fuera necesario */
+    width: 100%; /* Asegúrate de que ocupe todo el ancho disponible */
+    margin: 0 auto; /* Centrar el contenedor en el medio */
+    margin-top: 20px; /* Añadir un margen superior para dar espacio */
+}
+
+.center-button {
+    padding: 10px 20px; /* Tamaño adecuado para el botón */
+    background-color: #007bff; /* Color de fondo (puedes cambiarlo) */
+    color: #ffffff; /* Color del texto */
+    border: none; /* Quitar borde si lo tuviera */
+    border-radius: 5px; /* Bordes redondeados */
+    text-align: center; /* Centrar el texto en el botón */
+    text-decoration: none; /* Eliminar subrayado en el texto */
+    transition: background-color 0.3s; /* Transición para el hover */
+    width: auto; /* El botón no ocupará todo el ancho */
+    max-width: 200px; /* Define un ancho máximo para los botones */
+}
+
+.center-button:hover {
+    background-color: #0056b3; /* Cambia el color al pasar el cursor */
+}
+
+.actions .borrar {
+    background-color: #dc3545; /* Rojo para el botón eliminar */
+    color: #ffffff; /* Color del texto blanco */
+    border-radius: 4px;
+    padding: 8px 12px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    min-width: 70px;
+    text-align: center;
+}
+
+.actions .borrar:hover {
+    background-color: #c82333; /* Un rojo un poco más oscuro al pasar el cursor */
+}
+
+/* Estilo para el botón de "Editar" */
+.actions .editar {
+    background-color: #28a745; /* Verde para el botón editar */
+    color: #ffffff; /* Color del texto blanco */
+    border-radius: 4px;
+    padding: 8px 12px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    min-width: 70px;
+    text-align: center;
+}
+
+.actions .editar:hover {
+    background-color: #218838; /* Un verde un poco más oscuro al pasar el cursor */
+}
+
+/* Estilo para el botón "Editar mis datos" */
+.editar-datos {
+    background-color: #6c757d; /* Gris para el botón editar mis datos */
+    color: #ffffff; /* Color del texto blanco */
+    border-radius: 4px;
+    padding: 8px 12px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    min-width: 70px;
+    text-align: center;
+    display: inline-block; /* Asegura que se vea bien con el resto de botones */
+}
+
+.editar-datos:hover {
+    background-color: #5a6268; /* Un gris más oscuro al pasar el cursor */
+}
+
+.paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 20px 0;
+}
+
+.paginacion a {
+    text-decoration: none; /* Elimina el subrayado */
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: #fff;
+    background-color: #007bff;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.paginacion a:hover {
+    text-decoration: none; /* Asegurarse de que tampoco aparezca al pasar el ratón */
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.paginacion a.activo {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #0056b3;
+}
+
+
+th .ordenar {
+    text-decoration: none !important; /* Fuerza la eliminación del subrayado */
+    color: #007bff;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+}
+
+th .ordenar:hover {
+    color: #0056b3;
+}
+
+th .ordenar i {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+th .ordenar:hover i {
+    color: #007bff;
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Título del formulario */
+.form-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Mensajes de error y éxito */
+.error-message {
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.success-message {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* Estilos del formulario */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.form-input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Botón primario */
+.btn-primary {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+
+.back-to-login {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-secondary {
+    padding: 10px 15px;
+    background-color: #6c757d;
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+

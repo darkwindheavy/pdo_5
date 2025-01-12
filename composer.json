@@ -1,0 +1,19 @@
+{
+    "name": "daniel/pdo_5",
+    "description": "Proyecto de gestión de usuarios y artículos",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Daniel\\Pdo5\\": "includes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel Peris"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}

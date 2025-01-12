@@ -1,0 +1,9 @@
+ID,DNI,Nombre,Correo,Contraseña,Rol,Teléfono,Dirección,Localidad,Provincia,Fecha Creación
+40,62442129G,Alis,alis@lais.com,$2y$10$.a9DwzybvNQ7rL7rhe05jOeTZCPbYNk72nPLDlkrQcn91XlLg1cAC,usuario,123123123,tresmall 16,Altet,Alicante,2024-12-05 22:55:43
+41,23060568D,Alison,alison@lais.com,$2y$10$Sddde0uF13ru.rD8w8LEm.kgHk9Z3EjMFMBVzAwdXdP4x/RFZB.ae,usuario,123123321,tresmall 16,Altet,Alicante,2024-12-05 22:56:58
+36,87219784N,antonio,ant@ant.com,$2y$10$Y5VKzIcpehaOzGr38ZHEiOMZT/rC8ByR3U.Eun9Ct/70atrZUPvsG,administrador,444565656,tresmall 16,caudete,albacete,2024-12-05 20:45:56
+43,74224456Y,Daniel,ddd@d.com,$2y$10$Gs/pRHC0mhNqgwfCXEwfQejqO9b1INtCEV1E64UYOI.Z0.rzKDGFq,administrador,444565657,calle calvario 55,alicante,Alicante,2024-12-06 00:23:26
+39,94818448M,Victor,vi@vi.com,$2y$10$rCY53nj4xd2B9fA6woXfe.qKgHK9uNGwKiI4Pyv.Je0pJNSVVWzba,usuario,777898989,calle calvario 14,santa pola,Alicante,2024-12-05 22:04:49
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,Todas las contraseñas son 1234,,,,,,

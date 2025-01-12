@@ -1,0 +1,9 @@
+# Ignorar dependencias de Composer 
+/vendor/ 
+.env 
+*.log 
+*.cache 
+.idea/ 
+.vscode/ 
+.DS_Store 
+Thumbs.db 

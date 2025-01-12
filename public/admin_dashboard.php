@@ -1,0 +1,41 @@
+<?php
+session_start();
+
+require_once '../includes/funciones.php'; // Importar funciones
+require_once '../includes/header.php'; // Importar la cabecera común
+require_once '../includes/BaseDeDatos.php'; // Importar la clase BaseDeDatos
+require_once '../includes/Usuario.php'; // Importar la clase Usuario
+
+// Verificar si el usuario ha iniciado sesión y si es administrador
+verificar_sesion_y_rol(['administrador']);
+
+// Inicializar la conexión a la base de datos y la clase Usuario
+$db = new BaseDeDatos();
+$usuario = new Usuario($db);
+?>
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Panel de Administrador</h2>
+        <h2>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></h2>
+        <div class="button-container">
+            <a href="clientes.php" class="btn-dashboard">Gestionar Clientes</a>
+            <a href="admin_list.php" class="btn-dashboard">Gestionar Administradores</a>
+            <a href="logout.php" class="btn-dashboard logout">Cerrar Sesión</a>
+        </div>
+    </div>
+    <?php
+    require_once '../includes/footer.php'; // Importar el pie de página común
+    ?>
+</body>
+</html>

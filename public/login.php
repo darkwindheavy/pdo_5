@@ -1,0 +1,91 @@
+<?php
+session_start();
+require_once '../includes/funciones.php'; // Importar funciones reutilizables
+$mostrar_enlaces = false; // No mostrar enlaces en esta página
+require_once '../includes/header.php'; // Importar la cabecera común
+require_once '../includes/BaseDeDatos.php'; // Importar la clase BaseDeDatos
+require_once '../includes/Usuario.php'; // Importar la clase Usuario
+
+$db = new BaseDeDatos();
+$usuario = new Usuario($db);
+
+$error = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Recibir los valores y sanitizarlos
+    $dni = isset($_POST['dni']) ? trim(htmlspecialchars($_POST['dni'])) : '';
+    $contrasena = isset($_POST['contrasena']) ? trim($_POST['contrasena']) : '';
+
+    // Validación de campos
+    if (empty($dni) || empty($contrasena)) {
+        $error = "Por favor, ingrese el DNI y la contraseña.";
+    } else {
+        try {
+            // Verificar si el DNI existe y obtener el hash de la contraseña
+            $usuarioData = $usuario->obtenerUsuario($dni);
+
+            if ($usuarioData && password_verify($contrasena, $usuarioData['contrasena'])) {
+                // Si la contraseña es correcta, iniciar la sesión
+                $_SESSION['usuario_id'] = $usuarioData['id'];
+                $_SESSION['usuario_nombre'] = $usuarioData['nombre'];
+                $_SESSION['usuario_rol'] = $usuarioData['rol'];
+
+                
+                // Redirigir al panel correspondiente según el rol
+                switch (strtolower($usuarioData['rol'])) {
+                    case 'administrador':
+                        header("Location: admin_dashboard.php");
+                        break;
+                    case 'editor':
+                        header("Location: editor_dashboard.php");
+                        break;
+                    default:
+                        header("Location: zona_privada.php");
+                        break;
+                }
+                exit;
+            } else {
+                $error = "DNI o contraseña incorrectos.";
+            }
+        } catch (Exception $e) {
+            $error = "Error al iniciar sesión: " . $e->getMessage();
+        }
+    }
+}
+?>
+
+<!-- Formulario de Inicio de Sesión -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Inicio de Sesión</title>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+
+        <?php if ($error): ?>
+            <div class="error"><?php echo htmlspecialchars($error); ?></div>
+        <?php endif; ?>
+
+        <form action="login.php" method="post">
+            <div class="form-group">
+                <label for="dni">DNI:</label>
+                <input type="text" id="dni" name="dni" required>
+            </div>
+            <div class="form-group">
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required>
+            </div>
+            <button type="submit" class="btn-primary">Iniciar Sesión</button>
+        </form>
+        <a href="registro.php" class="btn-secondary">Crear una cuenta</a>
+        <a href="olvide_contrasena.php" class="btn-secondary">Olvidé mi contraseña</a>
+    <?php
+    require_once '../includes/footer.php'; // Importar el pie de página común
+    ?>
+</body>
+</html>
