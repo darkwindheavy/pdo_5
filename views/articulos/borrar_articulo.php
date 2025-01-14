@@ -25,7 +25,7 @@ try {
     $articulo->borrarArticulo($id);
 
     // Redirigir al usuario de nuevo a la lista de artículos con un mensaje de éxito
-    header("Location: editor_dashboard.php?mensaje=Artículo eliminado exitosamente");
+    header("Location: /PDO_5_MVC/public/index.php?page=editor/editor_dashboard&mensaje=Artículo eliminado exitosamente");
     exit;
 } catch (Exception $e) {
     // Manejar el error si ocurre alguna excepción

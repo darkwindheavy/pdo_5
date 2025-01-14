@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../app/Controladores/funciones.php'; // Importar funciones
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
@@ -29,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Mostrar mensaje de éxito y redirigir al login
         echo '<script>
                 alert("Registro exitoso. Serás redirigido a la página de inicio de sesión.");
-                window.location.href = "login.php";
+                window.location.href = "/PDO_5_MVC/public/index.php?page=auth/login";
             </script>';
         exit;
     } catch (Exception $e) {
@@ -44,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
     <title>Registro de Usuario</title>
 </head>
 <body>
@@ -52,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>Registro de Usuario</h1>
         <nav class="navbar">
             <ul>
-                <li><a href="index.php" class="nav-button">Inicio</a></li>
+                <li><a href="/PDO_5_MVC/public/index.php" class="nav-button">Inicio</a></li>
                 <!-- Ocultamos el enlace de cerrar sesión, ya que el usuario no está registrado -->
             </ul>
         </nav>
@@ -65,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
 
-        <form action="registro.php" method="post">
+        <form action="/PDO_5_MVC/public/index.php?page=auth/registro" method="post">
             <div>
                 <label for="dni">DNI:</label>
                 <input type="text" id="dni" name="dni" required>

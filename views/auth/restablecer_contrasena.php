@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
@@ -36,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restablecer Contraseña</title>
-    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
 </head>
 <body>
     <div class="container">
@@ -49,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if ($mensaje): ?>
             <div class="success-message"><?php echo htmlspecialchars($mensaje); ?></div>
         <?php else: ?>
-            <form action="restablecer_contrasena.php?token=<?php echo urlencode($token); ?>" method="post" class="form">
+            <form action="/PDO_5_MVC/public/index.php?page=auth/restablecer_contrasena&token=<?php echo urlencode($token); ?>" method="post" class="form">
                 <div class="form-group">
                     <label for="nueva_contrasena">Nueva Contraseña:</label>
                     <input type="password" id="nueva_contrasena" name="nueva_contrasena" required class="form-input">
@@ -66,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <!-- Botón para regresar al login -->
 <div class="back-to-login">
-    <a href="login.php" class="btn-secondary">Volver al Inicio de Sesión</a>
+    <a href="/PDO_5_MVC/public/index.php?page=auth/login" class="btn-secondary">Volver al Inicio de Sesión</a>
 </div>
 
     </div>

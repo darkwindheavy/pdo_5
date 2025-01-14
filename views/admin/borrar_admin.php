@@ -28,7 +28,7 @@ if ($id === $admin_logueado_id) {
     // Mostrar mensaje de error y redirigir a la lista de administradores
     echo '<script>
             alert("No puedes eliminar tu propia cuenta desde aquí.");
-            window.location.href = "admin_list.php";
+            window.location.href = "/PDO_5_MVC/public/index.php?page=admin/admin_list";
         </script>';
     exit;
 }
@@ -37,7 +37,7 @@ try {
     // Proceder con la eliminación si no es el administrador logueado
     $usuario->eliminarUsuario($id);
     // Redirigir al usuario de nuevo a la lista de administradores con un mensaje de éxito
-    header("Location: admin_list.php?mensaje=Administrador eliminado exitosamente");
+    header("Location: /PDO_5_MVC/public/index.php?page=admin/admin_list&mensaje=Administrador eliminado exitosamente");
     exit;
 } catch (Exception $e) {
     manejar_error("Error al eliminar el administrador: " . $e->getMessage());

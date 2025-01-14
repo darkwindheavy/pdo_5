@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Configurar PHPMailer
             $mail = new PHPMailer(true);
-            $enlace = "http://localhost/PDO_5/public/restablecer_contrasena.php?token=" . urlencode($token);
+            $enlace = "http://localhost/PDO_5_MVC/public/index.php?page=auth/restablecer_contrasena&token=" . urlencode($token);
 
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com'; // Servidor SMTP
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="success-message"><?php echo htmlspecialchars($mensaje); ?></div>
         <?php endif; ?>
 
-        <form action="olvide_contrasena.php" method="post" class="form">
+        <form action="/PDO_5_MVC/public/index.php?page=auth/olvide_contrasena" method="post" class="form">
             <div class="form-group">
                 <label for="dni">DNI:</label>
                 <input type="text" id="dni" name="dni" required class="form-input">
@@ -93,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
 
         <div class="back-to-login">
-            <a href="login.php" class="btn-secondary">Volver al Inicio de Sesión</a>
+            <a href="/PDO_5_MVC/public/index.php?page=auth/login" class="btn-secondary">Volver al Inicio de Sesión</a>
         </div>
     </div>
 </body>

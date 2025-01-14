@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../app/Controladores/funciones.php'; // Importar funciones
 require_once '../views/includes/header.php';
 require_once '../app/Modelos/BaseDeDatos.php';
@@ -46,14 +45,14 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Lista de Administradores</title>
 </head>
 <body>
     <h2>Lista de Administradores y editores</h2>
 
-    <form action="admin_list.php" method="get">
+    <form action="/PDO_5_MVC/public/index.php?page=admin/admin_list" method="get">
         <input type="text" name="busqueda" placeholder="Buscar administrador o editor" value="<?php echo htmlspecialchars($busqueda); ?>">
         <button type="submit">Buscar</button>
     </form>
@@ -70,7 +69,7 @@ try {
         <thead>
             <tr>
             <th>
-                <a href="?orden=<?php echo ($orden === 'ASC') ? 'DESC' : 'ASC'; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="ordenar">
+                <a href="/PDO_5_MVC/public/index.php?page=auth/admin/admin.list&orden=<?php echo ($orden === 'ASC') ? 'DESC' : 'ASC'; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="ordenar">
                 Nombre
                         <?php if ($orden === 'ASC'): ?>
                             <i class="fas fa-arrow-up"></i>
@@ -103,8 +102,8 @@ try {
                 <td><?php echo htmlspecialchars($admin['rol']); ?></td>
                 <td class="actions">
                     <?php if ($admin['rol'] !== 'superadministrador'): ?>
-                        <a href="editar_admin.php?id=<?php echo $admin['id']; ?>" class="editar">Editar</a>
-                        <a href="borrar_admin.php?id=<?php echo $admin['id']; ?>" class="borrar" onclick="return confirm('¿Está seguro de que desea eliminar este administrador?');">Eliminar</a>
+                        <a href="/PDO_5_MVC/public/index.php?page=admin/editar_admin&id=<?php echo $admin['id']; ?>"></a>" class="editar">Editar</a>
+                        <a href="/PDO_5_MVC/public/index.php?page=admin/borrar_admin&id=<?php echo $admin['id']; ?>" class="borrar" onclick="return confirm('¿Está seguro de que desea eliminar este administrador?');">Eliminar</a>
                     <?php endif; ?>
                 </td>
             </tr>
@@ -119,24 +118,24 @@ try {
 
     <div class="paginacion">
     <?php if ($paginaActual > 1): ?>
-        <a href="?pagina=<?php echo $paginaActual - 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="prev">Anterior</a>
+        <a href="/PDO_5_MVC/public/index.php?page=admin/admin_list&pagina=<?php echo $paginaActual - 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="prev">Anterior</a>
     <?php endif; ?>
 
     <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-        <a href="?pagina=<?php echo $i; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="<?php echo ($i === $paginaActual) ? 'active' : ''; ?>">
+        <a href="/PDO_5_MVC/public/index.php?page=admin/admin_list&pagina=<?php echo $i; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="<?php echo ($i === $paginaActual) ? 'active' : ''; ?>">
             <?php echo $i; ?>
         </a>
     <?php endfor; ?>
 
     <?php if ($paginaActual < $totalPaginas): ?>
-        <a href="?pagina=<?php echo $paginaActual + 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="next">Siguiente</a>
+        <a href="/PDO_5_MVC/public/index.php?page=admin/admin_list&pagina=<?php echo $paginaActual + 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="next">Siguiente</a>
     <?php endif; ?>
 </div>
 
 
     <div class="add-client">
-        <a href="admin_nuevo.php" class="add">Añadir Nuevo Administrador o editor</a>
-        <a href="editor_dashboard.php" class="add">Artículos</a>
+        <a href="/PDO_5_MVC/public/index.php?page=admin/admin_nuevo" class="add">Añadir Nuevo Administrador o editor</a>
+        <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard" class="add">Artículos</a>
     </div>
 
     <?php

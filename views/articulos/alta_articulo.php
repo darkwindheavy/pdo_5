@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../app/Controladores/funciones.php'; // Importar funciones
 require_once '../views/includes/header.php';
 require_once '../app/Modelos/BaseDeDatos.php';
@@ -33,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $articulo->crearArticulo($codigo, $nombre, $descripcion, $categoria, $precio, $nuevoNombre);
 
         // Redirigir con mensaje de éxito
-        header("Location: editor_dashboard.php?mensaje=" . urlencode("Artículo registrado exitosamente."));
+        header("Location: /PDO_5_MVC/public/index.php?page=editor/editor_dashboard&mensaje=" . urlencode("Artículo registrado exitosamente."));
         exit;
     } catch (Exception $e) {
         $error = $e->getMessage();
@@ -48,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
     <title>Alta de Artículo</title>
 </head>
 <body>
@@ -63,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="exito"><?php echo htmlspecialchars($exito); ?></div>
         <?php endif; ?>
 
-        <form action="alta_articulo.php" method="post" enctype="multipart/form-data">
+        <form action="/PDO_5_MVC/public/index.php?page=articulos/alta_articulo" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="codigo">Código:</label>
                 <input type="text" id="codigo" name="codigo" required pattern="[a-zA-Z]{3}[0-9]{1,5}" placeholder="El código debe estar formado por tres letras y seguido de hasta cinco números">
@@ -90,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <button type="submit" class="btn-primary">Registrar Artículo</button>
         </form>
-        <a href="editor_dashboard.php" class="btn-secondary">Volver</a>
+        <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard" class="btn-secondary">Volver</a>
     </div>
 
     <?php

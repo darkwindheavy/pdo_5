@@ -33,13 +33,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Redirigir al panel correspondiente según el rol
                 switch (strtolower($usuarioData['rol'])) {
                     case 'administrador':
-                        header("Location: admin_dashboard.php");
+                        header("Location: /PDO_5_MVC/public/index.php?page=admin/admin_dashboard");
                         break;
                     case 'editor':
-                        header("Location: editor_dashboard.php");
+                        header("Location: /PDO_5_MVC/public/index.php?page=editor/editor_dashboard");
                         break;
                     default:
-                        header("Location: zona_privada.php");
+                        header("Location: /PDO_5_MVC/public/index.php?page=misc/zona_privada");
                         break;
                 }
                 exit;
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
 
-        <form action="login.php" method="post">
+        <form action="/PDO_5_MVC/public/index.php?page=auth/login" method="post">
             <div class="form-group">
                 <label for="dni">DNI:</label>
                 <input type="text" id="dni" name="dni" required>
@@ -81,8 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <button type="submit" class="btn-primary">Iniciar Sesión</button>
         </form>
-        <a href="registro.php" class="btn-secondary">Crear una cuenta</a>
-        <a href="olvide_contrasena.php" class="btn-secondary">Olvidé mi contraseña</a>
+        <a href="/PDO_5_MVC/public/index.php?page=auth/registro" class="btn-secondary">Crear una cuenta</a>
+        <a href="/PDO_5_MVC/public/index.php?page=auth/olvide_contrasena" class="btn-secondary">Olvidé mi contraseña</a>
     <?php
     require_once '../views/includes/footer.php'; // Importar el pie de página común
     ?>

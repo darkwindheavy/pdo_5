@@ -57,7 +57,7 @@ try {
                     if ($imageInfo[0] > 200 || $imageInfo[1] > 200) {
                         $error = "La imagen no debe tener dimensiones mayores que 200x200 píxeles.";
                     } else {
-                        $uploadDir = '../uploads/articulos/';
+                        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/PDO_5_MVC/public/uploads/articulos/';
                         if (!is_dir($uploadDir)) {
                             mkdir($uploadDir, 0777, true);
                         }
@@ -95,7 +95,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
     <title>Editar Artículo</title>
 </head>
 <body>
@@ -111,7 +111,7 @@ try {
     <?php endif; ?>
 
     <?php if (!empty($datos_articulo)): ?>
-        <form action="editar_articulo.php?id=<?php echo $id; ?>" method="post" enctype="multipart/form-data">
+        <form action="/PDO_5_MVC/public/index.php?page=editor/editar_articulo&id=<?php echo $id; ?>" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="codigo">Código:</label>
                 <input type="text" id="codigo" name="codigo" value="<?php echo htmlspecialchars($datos_articulo['codigo']); ?>" required>
@@ -140,7 +140,7 @@ try {
         </form>
     <?php endif; ?>
 
-    <a href="editor_dashboard.php" class="btn-secondary">Volver al Dashboard del Editor</a>
+    <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard" class="btn-secondary">Volver al Dashboard del Editor</a>
 </div>
 <?php
 require_once '../views/includes/footer.php'; // Importar el pie de página común
