@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once '../includes/funciones.php'; //Importar funciones
-require_once '../includes/header.php'; // Importar la cabecera común
+require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../views/includes/header.php';
 
 // Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario_id'])) {
@@ -18,7 +18,7 @@ if (!isset($_SESSION['usuario_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zona Privada</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
     <div class="dashboard-container">
@@ -29,7 +29,7 @@ if (!isset($_SESSION['usuario_id'])) {
         </div>
     </div>
     <?php
-    require_once '../includes/footer.php'; // Importar el pie de página común
+    require_once '../views/includes/footer.php'; // Importar el pie de página común
     ?>
 
 </body>

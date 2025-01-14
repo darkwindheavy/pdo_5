@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once '../includes/funciones.php'; // Importar funciones reutilizables
-require_once '../includes/header.php'; // Importar la cabecera común
-require_once '../includes/BaseDeDatos.php'; // Importar la clase BaseDeDatos
-require_once '../includes/Usuario.php'; // Importar la clase Usuario
+require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../views/includes/header.php';
+require_once '../app/Modelos/BaseDeDatos.php';
+require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
 // Verificar si el usuario ha iniciado sesión y si es editor
 verificar_sesion_y_rol(['editor']);
@@ -64,7 +64,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Mis Datos</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
     <div class="edit-container">
@@ -118,6 +118,6 @@ try {
 
         <a href="editor_dashboard.php" class="btn-secondary">Volver al Panel del Editor</a>
     </div>
-    <?php require_once '../includes/footer.php'; ?>
+    <?php require_once '../views/includes/footer.php'; ?>
 </body>
 </html>

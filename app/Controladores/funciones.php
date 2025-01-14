@@ -3,36 +3,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Clase Cliente
-class Cliente {
-    public $id;
-    public $dni;
-    public $nombre;
-    public $correo;
-    public $telefono;
-    public $direccion;
-    public $localidad;
-    public $provincia;
-    public $rol;
-    public $contrasena;
-
-    public function __construct($id, $dni, $nombre, $correo, $telefono, $direccion, $localidad, $provincia, $rol, $contrasena = null ) {
-        $this->id = $id;
-        $this->dni = $dni;
-        $this->nombre = $nombre;
-        $this->correo = $correo;
-        $this->telefono = $telefono;
-        $this->direccion = $direccion;
-        $this->localidad = $localidad;
-        $this->provincia = $provincia;
-        $this->rol = $rol;
-        $this->contrasena = $contrasena;
-    }
-}
-
-
-
-
 // Función para manejar errores
 function manejar_error($mensaje) {
     echo "<script>alert('$mensaje'); window.location.href='login.php';</script>";

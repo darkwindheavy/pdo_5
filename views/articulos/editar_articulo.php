@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once '../includes/funciones.php'; // Importar funciones reutilizables
-require_once '../includes/header.php'; // Importar la cabecera común
-require_once '../includes/BaseDeDatos.php'; // Importar la clase BaseDeDatos
-require_once '../includes/Articulo.php'; // Importar la clase Articulo
+require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../views/includes/header.php';
+require_once '../app/Modelos/BaseDeDatos.php';
+require_once '../app/Modelos/Articulo.php'; // Importar la clase Usuario
 
 // Verificar si el usuario tiene acceso (editor o administrador)
 verificar_sesion_y_rol(['administrador', 'editor']);
@@ -95,7 +95,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="/public/css/styles.css">
     <title>Editar Artículo</title>
 </head>
 <body>
@@ -143,7 +143,7 @@ try {
     <a href="editor_dashboard.php" class="btn-secondary">Volver al Dashboard del Editor</a>
 </div>
 <?php
-require_once '../includes/footer.php'; // Importar el pie de página común
+require_once '../views/includes/footer.php'; // Importar el pie de página común
 ?>
 </body>
 </html>

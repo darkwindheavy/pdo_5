@@ -1,10 +1,9 @@
 <?php
-session_start();
-require_once '../includes/funciones.php'; // Importar funciones reutilizables
-$mostrar_enlaces = false; // No mostrar enlaces en esta página
-require_once '../includes/header.php'; // Importar la cabecera común
-require_once '../includes/BaseDeDatos.php'; // Importar la clase BaseDeDatos
-require_once '../includes/Usuario.php'; // Importar la clase Usuario
+require_once '../app/Controladores/funciones.php'; // Importar funciones reutilizables
+$mostrar_enlaces = false; // No mostrar enlaces en esta páginas
+require_once '../views/includes/header.php';
+require_once '../app/Modelos/BaseDeDatos.php';
+require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
 $db = new BaseDeDatos();
 $usuario = new Usuario($db);
@@ -60,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
     <title>Inicio de Sesión</title>
 </head>
 <body>
@@ -85,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="registro.php" class="btn-secondary">Crear una cuenta</a>
         <a href="olvide_contrasena.php" class="btn-secondary">Olvidé mi contraseña</a>
     <?php
-    require_once '../includes/footer.php'; // Importar el pie de página común
+    require_once '../views/includes/footer.php'; // Importar el pie de página común
     ?>
 </body>
 </html>

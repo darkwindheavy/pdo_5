@@ -3,8 +3,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require '../vendor/autoload.php'; // Carga las dependencias instaladas por Composer
-require '../includes/BaseDeDatos.php';
-require '../includes/Usuario.php';
+require_once '../app/Modelos/BaseDeDatos.php';
+require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
 $db = new BaseDeDatos();
 $usuario = new Usuario($db);
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Olvidé mi Contraseña</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
 </head>
 <body>
     <div class="container">

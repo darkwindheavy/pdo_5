@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once '../includes/funciones.php';
-require_once '../includes/header.php';
-require_once '../includes/BaseDeDatos.php';
-require_once '../includes/Usuario.php';
+require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../views/includes/header.php';
+require_once '../app/Modelos/BaseDeDatos.php';
+require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
 // Inicializar la conexión a la base de datos y la clase Usuario
 $db = new BaseDeDatos();
@@ -43,7 +43,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuarios</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/public/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -133,7 +133,7 @@ try {
 </div>
 
 <?php
-require_once '../includes/footer.php'; // Importar el pie de página común
+require_once '../views/includes/footer.php'; // Importar el pie de página común
 ?>
 
 </body>

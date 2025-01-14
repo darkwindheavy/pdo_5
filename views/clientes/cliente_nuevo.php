@@ -4,9 +4,9 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 ob_start(); // Captura cualquier salida accidental
 
-require_once '../includes/funciones.php';
-require_once '../includes/BaseDeDatos.php';
-require_once '../includes/Usuario.php';
+require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../app/Modelos/BaseDeDatos.php';
+require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
 ob_end_clean(); // Limpia cualquier salida acumulada
 
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Añadir Nuevo Cliente</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
     <div class="edit-container">
@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="clientes.php" class="btn-secondary">Volver a la Lista de Clientes</a>
     </div>
     <?php
-    require_once '../includes/footer.php'; // Importar el pie de página común
+    require_once '../views/includes/footer.php'; // Importar el pie de página común
     ?>
 
 </body>

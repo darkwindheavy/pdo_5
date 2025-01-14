@@ -1,6 +1,6 @@
 <?php
-require_once '../includes/BaseDeDatos.php';
-require_once '../includes/Usuario.php';
+require_once '../app/Modelos/BaseDeDatos.php';
+require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
 // Inicializar la conexión a la base de datos y la clase Usuario
 $db = new BaseDeDatos();

@@ -2,9 +2,9 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-require_once '../includes/funciones.php'; // Importar funciones reutilizables
-require_once '../includes/Usuario.php'; // Importar la clase Usuario
-require_once '../includes/BaseDeDatos.php'; // Importar la clase BaseDeDatos
+require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../app/Modelos/BaseDeDatos.php';
+require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
 // Verificar si el usuario ha iniciado sesión y si es administrador
 verificar_sesion_y_rol(['administrador']);

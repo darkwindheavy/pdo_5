@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once '../includes/funciones.php'; // Importar funciones reutilizables
-require_once '../includes/header.php'; // Importar la cabecera común
+require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../views/includes/header.php';
 
 // Verificar si el usuario ha iniciado sesión
 verificar_sesion_y_rol(['usuario', 'administrador', 'editor']); // Permitir a todos los roles acceder
@@ -14,7 +14,7 @@ verificar_sesion_y_rol(['usuario', 'administrador', 'editor']); // Permitir a to
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subir Imagen</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
     <h2>Formulario de Subida de Imágenes</h2>

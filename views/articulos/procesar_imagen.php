@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once '../includes/funciones.php'; // Importar funciones reutilizables
-require_once '../includes/header.php'; // Importar la cabecera común
+require_once '../app/Controladores/funciones.php'; // Importar funciones reutilizables
+require_once '../views/includes/header.php';
 
 // Verificar si el usuario ha iniciado sesión
 verificar_sesion_y_rol(['usuario', 'administrador', 'editor']); // Permitir a todos los roles acceder
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Método de solicitud no válido.";
 }
 
-require_once '../includes/footer.php'; // Importar el pie de página común
+require_once '../views/includes/footer.php'; // Importar el pie de página común
 
 
 
