@@ -723,4 +723,53 @@ th .ordenar:hover i {
     background-color: #5a6268;
 }
 
+th a {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: inherit; /* Hereda el color del texto del encabezado */
+    display: flex; /* Permite alinear el texto e ícono */
+    align-items: center; /* Alinea verticalmente */
+    justify-content: space-between; /* Separa el texto del ícono */
+}
+
+th a:hover {
+    color: #007BFF; /* Cambia el color en hover (opcional) */
+}
+
+th a i {
+    margin-left: 5px; /* Añade un pequeño margen al ícono */
+}
+
+/* Imagen en tabla */
+.table-img {
+    cursor: pointer;
+    max-width: 30px;
+    max-height: 30px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.table-img:hover {
+    transform: scale(1.1);
+}
+
+/* Imagen ampliada */
+.enlarged-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.enlarged-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border: 5px solid #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
 

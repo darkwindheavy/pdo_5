@@ -416,7 +416,7 @@ public function eliminarUsuario($id) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
     
             if (!$usuario) {
-                throw new Exception("El token es inválido o ha expirado.");
+                throw new Exception("La solicitud de restablecimiento no es válida.");
             }
     
             // Actualizar la contraseña del usuario

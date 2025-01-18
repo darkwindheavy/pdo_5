@@ -213,7 +213,7 @@ public function validarArticulo($codigo, $imagen) {
     }
 }
 
-public function procesarImagen($imagen, $uploadDir = '../uploads/articulos/') {
+public function procesarImagen($imagen, $uploadDir = '../public/uploads/articulos/') {
     // Crear el directorio si no existe
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0777, true);

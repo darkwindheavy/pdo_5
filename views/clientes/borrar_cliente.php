@@ -30,7 +30,7 @@ try {
 
         if ($resultado) {
             // Redirigir al usuario de nuevo a la lista de clientes con un mensaje de éxito
-            header("Location: clientes.php?mensaje=Cliente eliminado exitosamente");
+            header("Location: /PDO_5_MVC/public/index.php?page=clientes/clientes&mensaje=Cliente eliminado exitosamente");
             exit;
         } else {
             manejar_error("No se pudo eliminar el cliente. Es posible que no exista.");

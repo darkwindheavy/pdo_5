@@ -1,59 +1,56 @@
 <?php
-session_start();
 require_once '../app/Controladores/funciones.php'; // Importar funciones
 require_once '../views/includes/header.php';
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
-// Verificar si el usuario ha iniciado sesión y si es administrador
-verificar_sesion_y_rol(['administrador']);
+verificar_sesion_y_rol(['administrador']); // Verificar rol de administrador
 
-// Inicializar la conexión a la base de datos y la clase Usuario
 $db = new BaseDeDatos();
 $usuario = new Usuario($db);
 
 $error = '';
 $exito = '';
 
-// Verificar si se recibió el ID del cliente a editar
+// Verificar si se recibió el ID del cliente
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    manejar_error("No se ha especificado un ID de cliente válido.");
+    manejar_error("No se ha especificado un ID válido.");
 }
 
 $id = intval($_GET['id']);
 
 try {
-    // Obtener el cliente que se intenta editar
+    // Obtener datos del cliente
     $cliente = $usuario->obtenerUsuarioPorId($id);
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Recibir los valores del formulario
-        $dni = trim($_POST['dni']);
-        $nombre = trim($_POST['nombre']);
-        $correo = trim($_POST['correo']);
-        $telefono = trim($_POST['telefono']);
-        $direccion = trim($_POST['direccion']);
-        $localidad = trim($_POST['localidad']);
-        $provincia = trim($_POST['provincia']);
-        $rol = 'usuario'; // El rol siempre será 'usuario' para clientes
-        $contrasena = isset($_POST['contrasena']) && !empty($_POST['contrasena']) ? $_POST['contrasena'] : null;
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        if (isset($_POST['eliminar'])) {
+            // Eliminar cliente
+            $usuario->eliminarUsuario($id);
+            $exito = "Cliente eliminado exitosamente.";
+            header("Location: /PDO_5_MVC/public/index.php?page=clientes/clientes&mensaje=" . urlencode($exito));
+            exit;
+        } else {
+            // Actualizar cliente
+            $dni = trim($_POST['dni']);
+            $nombre = trim($_POST['nombre']);
+            $correo = trim($_POST['correo']);
+            $telefono = trim($_POST['telefono']);
+            $direccion = trim($_POST['direccion']);
+            $localidad = trim($_POST['localidad']);
+            $provincia = trim($_POST['provincia']);
+            $contrasena = !empty($_POST['contrasena']) ? $_POST['contrasena'] : null;
 
-
-        // Editar el cliente
-        $usuario->editarUsuario($id, $dni, $nombre, $correo, $telefono, $direccion, $localidad, $provincia, $rol, $contrasena);
-        $exito = "Cliente actualizado exitosamente.";
-        //$cliente = $usuario->obtenerUsuarioPorId($id);
-
-        // Redirigir a la lista de administradores después de crear el usuario
-        header("Location: clientes.php?mensaje=" . urlencode($exito));
-        exit;
-        
+            $usuario->editarUsuario($id, $dni, $nombre, $correo, $telefono, $direccion, $localidad, $provincia, 'usuario', $contrasena);
+            $exito = "Cliente actualizado exitosamente.";
+            header("Location: /PDO_5_MVC/public/index.php?page=clientes/clientes&mensaje=" . urlencode($exito));
+            exit;
+        }
     }
 } catch (Exception $e) {
     $error = $e->getMessage();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -61,7 +58,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Cliente</title>
-    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
 </head>
 <body>
     <div class="edit-container">
@@ -76,9 +73,9 @@ try {
         <?php endif; ?>
 
         <?php if (!empty($cliente)): ?>
-            <form action="editar_cliente.php?id=<?php echo $id; ?>" method="post">
-            <div class="form-group">
-                    <label for="nombre">Dni:</label>
+            <form action="/PDO_5_MVC/public/index.php?page=clientes/editar_cliente&id=<?php echo $id; ?>" method="post">
+                <div class="form-group">
+                    <label for="dni">DNI:</label>
                     <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($cliente['dni']); ?>" required>
                 </div>
                 <div class="form-group">
@@ -91,44 +88,33 @@ try {
                 </div>
                 <div class="form-group">
                     <label for="direccion">Dirección:</label>
-                    <input type="text" id="direccion" name="direccion" value="<?php echo htmlspecialchars($cliente['direccion']); ?>" >
+                    <input type="text" id="direccion" name="direccion" value="<?php echo htmlspecialchars($cliente['direccion']); ?>">
                 </div>
                 <div class="form-group">
                     <label for="localidad">Localidad:</label>
-                    <input type="text" id="localidad" name="localidad" value="<?php echo htmlspecialchars($cliente['localidad']); ?>" >
+                    <input type="text" id="localidad" name="localidad" value="<?php echo htmlspecialchars($cliente['localidad']); ?>">
                 </div>
                 <div class="form-group">
                     <label for="provincia">Provincia:</label>
-                    <input type="text" id="provincia" name="provincia" value="<?php echo htmlspecialchars($cliente['provincia']); ?>" >
+                    <input type="text" id="provincia" name="provincia" value="<?php echo htmlspecialchars($cliente['provincia']); ?>">
                 </div>
                 <div class="form-group">
                     <label for="telefono">Teléfono:</label>
                     <input type="text" id="telefono" name="telefono" value="<?php echo htmlspecialchars($cliente['telefono']); ?>" required>
                 </div>
                 <div class="form-group">
-                    <label for="rol">Rol:</label>
-                    <select id="rol" name="rol" required>
-                        <option value="usuario" <?php echo ($cliente['rol'] === 'usuario') ? 'selected' : ''; ?>>Usuario</option>
-                        <?php if ($_SESSION['usuario_rol'] === 'superadministrador'): ?>
-                            <option value="administrador" <?php echo ($cliente['rol'] === 'administrador') ? 'selected' : ''; ?>>Administrador</option>
-                        <?php endif; ?>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="contrasena">Contraseña (dejar en blanco para no cambiar):</label>
                     <input type="password" id="contrasena" name="contrasena">
                 </div>
                 <button type="submit" class="btn-primary">Actualizar</button>
-                <button type="submit" name="eliminar" onclick="return confirm('Está seguro de que desea eliminar este cliente?');" class="btn-delete">Eliminar Cliente</button>
+                <button type="submit" name="eliminar" class="btn-delete" onclick="return confirm('¿Está seguro de que desea eliminar este cliente?');">Eliminar Cliente</button>
             </form>
         <?php endif; ?>
 
-        <a href="clientes.php" class="btn-secondary">Volver a la Lista de Clientes</a>
+        <a href="/PDO_5_MVC/public/index.php?page=clientes/clientes" class="btn-secondary">Volver a la Lista de Clientes</a>
     </div>
 
-<?php
-require_once '../views/includes/footer.php'; // Importar el pie de página común
-?>
-
+    <?php require_once '../views/includes/footer.php'; ?>
 </body>
 </html>
+

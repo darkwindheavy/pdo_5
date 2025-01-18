@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../app/Controladores/funciones.php'; // Importar funciones
 require_once '../views/includes/header.php';
 require_once '../app/Modelos/BaseDeDatos.php';

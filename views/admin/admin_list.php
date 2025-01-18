@@ -52,10 +52,12 @@ try {
 <body>
     <h2>Lista de Administradores y editores</h2>
 
-    <form action="/PDO_5_MVC/public/index.php?page=admin/admin_list" method="get">
-        <input type="text" name="busqueda" placeholder="Buscar administrador o editor" value="<?php echo htmlspecialchars($busqueda); ?>">
-        <button type="submit">Buscar</button>
-    </form>
+    <form action="/PDO_5_MVC/public/index.php" method="get">
+    <input type="hidden" name="page" value="admin/admin_list">
+    <input type="text" name="busqueda" placeholder="Buscar administrador o editor" value="<?php echo htmlspecialchars($busqueda); ?>">
+    <button type="submit">Buscar</button>
+</form>
+
 
     <?php if ($error): ?>
         <div class="error"><?php echo htmlspecialchars($error); ?></div>
@@ -69,7 +71,7 @@ try {
         <thead>
             <tr>
             <th>
-                <a href="/PDO_5_MVC/public/index.php?page=auth/admin/admin.list&orden=<?php echo ($orden === 'ASC') ? 'DESC' : 'ASC'; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="ordenar">
+                <a href="/PDO_5_MVC/public/index.php?page=admin/admin_list&orden=<?php echo ($orden === 'ASC') ? 'DESC' : 'ASC'; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="ordenar">
                 Nombre
                         <?php if ($orden === 'ASC'): ?>
                             <i class="fas fa-arrow-up"></i>
@@ -102,7 +104,7 @@ try {
                 <td><?php echo htmlspecialchars($admin['rol']); ?></td>
                 <td class="actions">
                     <?php if ($admin['rol'] !== 'superadministrador'): ?>
-                        <a href="/PDO_5_MVC/public/index.php?page=admin/editar_admin&id=<?php echo $admin['id']; ?>"></a>" class="editar">Editar</a>
+                        <a href="/PDO_5_MVC/public/index.php?page=admin/editar_admin&id=<?php echo $admin['id']; ?>" class="editar">Editar</a>
                         <a href="/PDO_5_MVC/public/index.php?page=admin/borrar_admin&id=<?php echo $admin['id']; ?>" class="borrar" onclick="return confirm('¿Está seguro de que desea eliminar este administrador?');">Eliminar</a>
                     <?php endif; ?>
                 </td>

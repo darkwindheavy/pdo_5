@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../app/Controladores/funciones.php'; // Importar funciones
 require_once '../views/includes/header.php';
 require_once '../app/Modelos/BaseDeDatos.php';
@@ -69,7 +68,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Administrador</title>
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
 </head>
 <body>
     <div class="edit-container">

@@ -12,26 +12,27 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
     <title>Sistema de Gestión de Clientes</title>
 </head>
 <body>
     <header>
         <h1>Bienvenido al Sistema de Gestión</h1>
-        <!-- Solo mostrar la barra de navegación si no estamos en login.php -->
-        <?php if ($current_page !== 'login.php'): ?>
+        <!-- Solo mostrar la barra de navegación si no estamos en login -->
+        <?php if ($current_page !== 'auth/login'): ?>
         <nav class="navbar">
             <ul>
-                <li><a href="index.php" class="nav-button">Inicio</a></li>
+                <li><a href="/PDO_5_MVC/public/index.php" class="nav-button">Inicio</a></li>
                 <?php if (isset($_SESSION['usuario_rol']) && ($_SESSION['usuario_rol'] === 'administrador' || $_SESSION['usuario_rol'] === 'superadministrador')): ?>
-                    <li><a href="clientes.php" class="nav-button">Clientes</a></li>
-                    <li><a href="admin_dashboard.php" class="nav-button">Panel Admin</a></li>
+                    <li><a href="/PDO_5_MVC/public/index.php?page=clientes/clientes" class="nav-button">Clientes</a></li>
+                    <li><a href="/PDO_5_MVC/public/index.php?page=admin/admin_dashboard" class="nav-button">Panel Admin</a></li>
                 <?php endif; ?>
-                <li><a href="logout.php" class="nav-button">Cerrar Sesión</a></li>
+                <li><a href="/PDO_5_MVC/public/index.php?page=auth/logout" class="nav-button">Cerrar Sesión</a></li>
             </ul>
         </nav>
         <?php endif; ?>
     </header>
+
 
 
 

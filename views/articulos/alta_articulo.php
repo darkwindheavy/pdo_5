@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
     <title>Alta de Artículo</title>
 </head>
 <body>
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="/PDO_5_MVC/public/index.php?page=articulos/alta_articulo" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="codigo">Código:</label>
-                <input type="text" id="codigo" name="codigo" required pattern="[a-zA-Z]{3}[0-9]{1,5}" placeholder="El código debe estar formado por tres letras y seguido de hasta cinco números">
+                <input type="text" id="codigo" name="codigo" required pattern="[a-zA-Z]{3}[0-9]{1,5}" placeholder="Tres letras seguidas de hasta cinco números">
             </div>
             <div class="form-group">
                 <label for="nombre">Nombre:</label>

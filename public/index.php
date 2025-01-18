@@ -18,46 +18,35 @@ require_once '../app/Modelos/Articulo.php';
 $page = isset($_GET['page']) ? $_GET['page'] : 'auth/login';
 $viewPath = "../views/$page.php";
 
-// Lógica para redirigir según el rol del usuario
-if (isset($_SESSION['usuario_rol'])) {
+// Redirecciones según el rol
+if (isset($_SESSION['usuario_rol']) && in_array($page, ['auth/login'])) {
     switch ($_SESSION['usuario_rol']) {
         case 'administrador':
-            // Redirigir al dashboard del administrador
-            if ($page === 'auth/login') {
-                header("Location: /PDO_5_MVC/public/index.php?page=admin/admin_dashboard");
-                exit;
-            }
-            break;
+            header("Location: /PDO_5_MVC/public/index.php?page=admin/admin_dashboard");
+            exit;
         case 'editor':
-            // Redirigir al dashboard del editor
-            if ($page === 'auth/login') {
-                header("Location: /PDO_5_MVC/public/index.php?page=editor/editor_dashboard");
-                exit;
-            }
-            break;
+            header("Location: /PDO_5_MVC/public/index.php?page=editor/editor_dashboard");
+            exit;
         default:
-            // Redirigir a la zona privada por defecto
-            if ($page === 'auth/login') {
-                header("Location: /PDO_5_MVC/public/index.php?page=zona_privada");
-                exit;
-            }
-            break;
+            header("Location: /PDO_5_MVC/public/index.php?page=misc/zona_privada");
+            exit;
     }
 }
 
-// Verificar si la vista existe
-if (file_exists($viewPath)) {
-    // Verificar si se requiere inicio de sesión para la vista
-    if ($page !== 'auth/login' && !isset($_SESSION['usuario_id'])) {
-        header("Location: /PDO_5_MVC/public/index.php?page=auth/login");
-        exit;
-    }
+// Verificar si la página es pública o el usuario está autenticado
+$publicPages = ['auth/login', 'auth/registro', 'auth/olvide_contrasena', 'auth/restablecer_contrasena'];
+if (!in_array($page, $publicPages) && !isset($_SESSION['usuario_id'])) {
+    header("Location: /PDO_5_MVC/public/index.php?page=auth/login");
+    exit;
+}
 
-    // Incluir la vista
+// Verificar si la vista existe e incluirla
+if (file_exists($viewPath)) {
     require_once $viewPath;
 } else {
     die("Página no encontrada: $page");
 }
+
 
 
 

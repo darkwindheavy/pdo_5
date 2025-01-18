@@ -1,7 +1,5 @@
 <?php
-session_start();
-require_once '../app/Controladores/funciones.php'; // Importar funciones
-require_once '../views/includes/header.php';
+require_once '../app/Controladores/funciones.php'; // Importar funciones reutilizables
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
@@ -43,12 +41,9 @@ try {
             $usuario->editarUsuario($editor_id, $dni, $nombre, $correo, $telefono, $direccion, $localidad, $provincia, 'editor', $contrasena);
             $exito = "Datos del editor actualizados exitosamente.";
 
-            // Actualizar los datos reflejados en el formulario
-            $datos_editor = $usuario->obtenerUsuarioPorId($editor_id);
-            // Redirigir a la zona privada despues de editar los datos
-        header("Location: editor_dashboard.php?mensaje=" . urlencode($exito));
-        exit;
-
+            // Redirigir al formulario actual para mostrar mensaje de éxito
+            header("Location: /PDO_5_MVC/public/index.php?page=usuarios/editar_editor&mensaje=" . urlencode($exito));
+            exit;
         } catch (Exception $e) {
             $error = $e->getMessage();
         }
@@ -64,22 +59,22 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Mis Datos</title>
-    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
 </head>
 <body>
     <div class="edit-container">
         <h2>Editar Mis Datos</h2>
 
+        <?php if (isset($_GET['mensaje'])): ?>
+            <div class="exito"><?php echo htmlspecialchars($_GET['mensaje']); ?></div>
+        <?php endif; ?>
+
         <?php if ($error): ?>
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
 
-        <?php if ($exito): ?>
-            <div class="exito"><?php echo htmlspecialchars($exito); ?></div>
-        <?php endif; ?>
-
         <?php if (!empty($datos_editor)): ?>
-            <form action="editar_editor.php" method="post">
+            <form action="/PDO_5_MVC/public/index.php?page=usuarios/editar_editor" method="post">
                 <div class="form-group">
                     <label for="dni">DNI:</label>
                     <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_editor['dni']); ?>" required>
@@ -116,8 +111,9 @@ try {
             </form>
         <?php endif; ?>
 
-        <a href="editor_dashboard.php" class="btn-secondary">Volver al Panel del Editor</a>
+        <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard" class="btn-secondary">Volver al Panel del Editor</a>
     </div>
     <?php require_once '../views/includes/footer.php'; ?>
 </body>
 </html>
+

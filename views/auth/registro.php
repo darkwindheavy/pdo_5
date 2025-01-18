@@ -1,14 +1,13 @@
 <?php
 require_once '../app/Controladores/funciones.php'; // Importar funciones
-require_once '../app/Modelos/BaseDeDatos.php';
-require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
+require_once '../app/Modelos/BaseDeDatos.php'; // Base de datos
+require_once '../app/Modelos/Usuario.php'; // Clase Usuario
 
-// Inicializar la conexión a la base de datos y la clase Usuario
+// Inicializar la conexión y la clase Usuario
 $db = new BaseDeDatos();
 $usuario = new Usuario($db);
 
 $error = '';
-$exito = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
@@ -22,28 +21,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $provincia = trim(htmlspecialchars($_POST['provincia']));
         $contrasena = trim($_POST['contrasena']);
 
-        // Crear el usuario utilizando la clase Usuario
+        // Crear el usuario
         $usuario->crearUsuario($dni, $nombre, $correo, $telefono, $direccion, $localidad, $provincia, 'usuario', $contrasena);
         
-        // Mostrar mensaje de éxito y redirigir al login
-        echo '<script>
-                alert("Registro exitoso. Serás redirigido a la página de inicio de sesión.");
-                window.location.href = "/PDO_5_MVC/public/index.php?page=auth/login";
-            </script>';
+        // Redirigir al login con éxito
+        header("Location: /PDO_5_MVC/public/index.php?page=auth/login&mensaje=" . urlencode("Registro exitoso. Ahora puedes iniciar sesión."));
         exit;
+
     } catch (Exception $e) {
         $error = $e->getMessage();
     }
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
     <title>Registro de Usuario</title>
 </head>
 <body>
@@ -51,8 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>Registro de Usuario</h1>
         <nav class="navbar">
             <ul>
-                <li><a href="/PDO_5_MVC/public/index.php" class="nav-button">Inicio</a></li>
-                <!-- Ocultamos el enlace de cerrar sesión, ya que el usuario no está registrado -->
+                <li><a href="/PDO_5_MVC/public/index.php?page=auth/login" class="nav-button">Inicio</a></li>
             </ul>
         </nav>
     </header>
@@ -101,14 +96,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
 
         <div class="login-link">
-            <p>¿Ya tienes una cuenta? <a href="login.php" class="btn-secondary">Inicia sesión aquí</a></p>
+            <p>¿Ya tienes una cuenta? <a href="/PDO_5_MVC/public/index.php?page=auth/login" class="btn-secondary">Inicia sesión aquí</a></p>
         </div>
     </div>
 
-    <?php
-    require_once '../views/includes/footer.php'; // Importar el pie de página común
-    ?>
+    <?php require_once '../views/includes/footer.php'; ?>
 </body>
 </html>
+
 
 

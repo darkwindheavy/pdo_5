@@ -66,6 +66,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="login-container">
         <h2>Iniciar Sesión</h2>
 
+        <?php if (isset($_GET['mensaje'])): ?>
+            <div class="exito">
+                <?php echo htmlspecialchars($_GET['mensaje']); ?>
+            </div>
+        <?php endif; ?>
+
         <?php if ($error): ?>
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>

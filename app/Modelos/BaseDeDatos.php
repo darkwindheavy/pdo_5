@@ -4,7 +4,7 @@ class BaseDeDatos {
 
     public function __construct() {
         try {
-            $this->conn = new PDO("mysql:host=localhost;dbname=daniel_peris", "root", "");
+            $this->conn = new PDO("mysql:host=localhost;dbname=daniel_peris_mvc", "root", "");
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             die("Error al conectar con la base de datos: " . $e->getMessage());

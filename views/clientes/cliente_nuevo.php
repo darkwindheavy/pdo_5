@@ -1,14 +1,7 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-ob_start(); // Captura cualquier salida accidental
-
 require_once '../app/Controladores/funciones.php'; // Importar funciones
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
-
-ob_end_clean(); // Limpia cualquier salida acumulada
 
 // Verificar si el usuario ha iniciado sesión y si es administrador
 verificar_sesion_y_rol(['administrador']);
@@ -34,16 +27,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $contrasena = isset($_POST['contrasena']) ? $_POST['contrasena'] : null;
 
         // Crear el cliente
-        $exito = $usuario->crearUsuario($dni, $nombre, $correo, $telefono, $direccion, $localidad, $provincia, $rol, $contrasena);
-        $mensaje = "Cliente añadido exitosamente: " . htmlspecialchars($exito);
+        $usuario->crearUsuario($dni, $nombre, $correo, $telefono, $direccion, $localidad, $provincia, $rol, $contrasena);
+        $exito = "Cliente añadido exitosamente.";
 
         // Redirigir si no hay errores
-        header("Location: clientes.php?mensaje=" . urlencode($exito));
+        header("Location: /PDO_5_MVC/public/index.php?page=clientes/clientes&mensaje=" . urlencode($exito));
         exit;
-
-            } catch (Exception $e) {
+    } catch (Exception $e) {
         $error = "Error al añadir cliente: " . htmlspecialchars($e->getMessage());
-        }
+    }
 }
 ?>
 
@@ -54,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Añadir Nuevo Cliente</title>
-    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
 </head>
 <body>
     <div class="edit-container">
@@ -68,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="exito"><?php echo htmlspecialchars($exito); ?></div>
         <?php endif; ?>
 
-        <form action="cliente_nuevo.php" method="post">
+        <form action="/PDO_5_MVC/public/index.php?page=clientes/cliente_nuevo" method="post">
             <div class="form-group">
                 <label for="dni">DNI:</label>
                 <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($dni ?? ''); ?>" required>
@@ -99,19 +91,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div class="form-group">
                 <label for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" value="">
+                <input type="password" id="contrasena" name="contrasena">
             </div>
             <button type="submit" class="btn-primary">Añadir Cliente</button>
         </form>
 
-        <a href="clientes.php" class="btn-secondary">Volver a la Lista de Clientes</a>
+        <a href="/PDO_5_MVC/public/index.php?page=clientes/clientes" class="btn-secondary">Volver a la Lista de Clientes</a>
     </div>
     <?php
     require_once '../views/includes/footer.php'; // Importar el pie de página común
     ?>
-
 </body>
 </html>
+
 
 
 
