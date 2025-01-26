@@ -1,22 +1,16 @@
 <?php
-ob_start(); // Inicia el búfer de salida
-
 require_once '../app/Controladores/funciones.php'; // Importar funciones reutilizables
 require_once '../app/Controladores/config.php';
+$mostrar_enlaces = false; // No mostrar enlaces en esta páginas
+require_once '../views/includes/header.php';
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
-
-// Inicia sesión solo si aún no está iniciada
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
 
 $db = new BaseDeDatos();
 $usuario = new Usuario($db);
 
 $error = '';
 
-// Procesar formulario de inicio de sesión
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recibir los valores y sanitizarlos
     $dni = isset($_POST['dni']) ? trim(htmlspecialchars($_POST['dni'])) : '';
@@ -36,18 +30,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['usuario_nombre'] = $usuarioData['nombre'];
                 $_SESSION['usuario_rol'] = $usuarioData['rol'];
 
+                
                 // Redirigir al panel correspondiente según el rol
                 switch (strtolower($usuarioData['rol'])) {
                     case 'administrador':
                         header("Location: " . BASE_URL . "index.php?page=admin/admin_dashboard");
-                        exit;
+                        break;
                     case 'editor':
                         header("Location: " . BASE_URL . "index.php?page=editor/editor_dashboard");
-                        exit;
+                        break;
                     default:
                         header("Location: " . BASE_URL . "index.php?page=misc/zona_privada");
-                        exit;
+                        break;
                 }
+                exit;
             } else {
                 $error = "DNI o contraseña incorrectos.";
             }
@@ -56,16 +52,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
-ob_end_flush(); // Finaliza el búfer de salida
 ?>
 
+<!-- Formulario de Inicio de Sesión -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/styles.css">
+    <link rel="stylesheet" href="../public/css/styles.css">
     <title>Inicio de Sesión</title>
 </head>
 <body>
@@ -95,8 +90,8 @@ ob_end_flush(); // Finaliza el búfer de salida
         </form>
         <a href="<?php echo BASE_URL; ?>index.php?page=auth/registro" class="btn-secondary">Crear una cuenta</a>
         <a href="<?php echo BASE_URL; ?>index.php?page=auth/olvide_contrasena" class="btn-secondary">Olvidé mi contraseña</a>
-    </div>
-    <?php require_once '../views/includes/footer.php'; ?>
+    <?php
+    require_once '../views/includes/footer.php'; // Importar el pie de página común
+    ?>
 </body>
 </html>
-

@@ -2,7 +2,6 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
 require_once '../app/Controladores/config.php';
 
 // Obtener el nombre de la página actual
@@ -20,7 +19,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <header>
         <h1>Bienvenido al Sistema de Gestión</h1>
         <!-- Solo mostrar la barra de navegación si no estamos en login -->
-        <?php if ($current_page !== 'login.php'): ?>
+        <?php if ($current_page !== 'auth/login'): ?>
         <nav class="navbar">
             <ul>
                 <li><a href="<?php echo BASE_URL; ?>index.php" class="nav-button">Inicio</a></li>
@@ -33,7 +32,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
         </nav>
         <?php endif; ?>
     </header>
-
 
 
 

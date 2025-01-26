@@ -1,6 +1,6 @@
 <?php
-session_start();
-require_once '../app/Controladores/funciones.php'; // Importar funciones reutilizables
+require_once '../app/Controladores/funciones.php';
+require_once '../app/Controladores/config.php'; // Importar funciones reutilizables
 require_once '../views/includes/header.php';
 
 // Verificar si el usuario ha iniciado sesión
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Generar un nombre único para evitar colisiones
                 $nuevoNombre = uniqid() . '_' . basename($fileName);
-                $uploadDir = BASE_DIR . 'public/uploads/images/';;
+                $uploadDir = BASE_DIR . '/uploads/images/';;
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
