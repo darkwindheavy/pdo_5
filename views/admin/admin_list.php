@@ -45,14 +45,12 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="stylesheet<?php echo BASE_URL; ?>css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Lista de Administradores</title>
 </head>
 <body>
-    <h2>Lista de Administradores y editores</h2>
-
-    <form action="/PDO_5_MVC/public/index.php" method="get">
+    <h2>Lista de Administradores y editores</h2><?php echo BASE_URL; ?>index.php" method="get">
     <input type="hidden" name="page" value="admin/admin_list">
     <input type="text" name="busqueda" placeholder="Buscar administrador o editor" value="<?php echo htmlspecialchars($busqueda); ?>">
     <button type="submit">Buscar</button>
@@ -71,7 +69,7 @@ try {
         <thead>
             <tr>
             <th>
-                <a href="/PDO_5_MVC/public/index.php?page=admin/admin_list&orden=<?php echo ($orden === 'ASC') ? 'DESC' : 'ASC'; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="ordenar">
+                <a href="<?php echo BASE_URL; ?>index.php?page=admin/admin_list&orden=<?php echo ($orden === 'ASC') ? 'DESC' : 'ASC'; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="ordenar">
                 Nombre
                         <?php if ($orden === 'ASC'): ?>
                             <i class="fas fa-arrow-up"></i>
@@ -104,8 +102,8 @@ try {
                 <td><?php echo htmlspecialchars($admin['rol']); ?></td>
                 <td class="actions">
                     <?php if ($admin['rol'] !== 'superadministrador'): ?>
-                        <a href="/PDO_5_MVC/public/index.php?page=admin/editar_admin&id=<?php echo $admin['id']; ?>" class="editar">Editar</a>
-                        <a href="/PDO_5_MVC/public/index.php?page=admin/borrar_admin&id=<?php echo $admin['id']; ?>" class="borrar" onclick="return confirm('¿Está seguro de que desea eliminar este administrador?');">Eliminar</a>
+                        <a href="<?php echo BASE_URL; ?>index.php?page=admin/editar_admin&id=<?php echo $admin['id']; ?>" class="editar">Editar</a>
+                        <a href="<?php echo BASE_URL; ?>index.php?page=admin/borrar_admin&id=<?php echo $admin['id']; ?>" class="borrar" onclick="return confirm('¿Está seguro de que desea eliminar este administrador?');">Eliminar</a>
                     <?php endif; ?>
                 </td>
             </tr>
@@ -120,24 +118,24 @@ try {
 
     <div class="paginacion">
     <?php if ($paginaActual > 1): ?>
-        <a href="/PDO_5_MVC/public/index.php?page=admin/admin_list&pagina=<?php echo $paginaActual - 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="prev">Anterior</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=admin/admin_list&pagina=<?php echo $paginaActual - 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="prev">Anterior</a>
     <?php endif; ?>
 
     <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-        <a href="/PDO_5_MVC/public/index.php?page=admin/admin_list&pagina=<?php echo $i; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="<?php echo ($i === $paginaActual) ? 'active' : ''; ?>">
+        <a href="<?php echo BASE_URL; ?>index.php?page=admin/admin_list&pagina=<?php echo $i; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="<?php echo ($i === $paginaActual) ? 'active' : ''; ?>">
             <?php echo $i; ?>
         </a>
     <?php endfor; ?>
 
     <?php if ($paginaActual < $totalPaginas): ?>
-        <a href="/PDO_5_MVC/public/index.php?page=admin/admin_list&pagina=<?php echo $paginaActual + 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="next">Siguiente</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=admin/admin_list&pagina=<?php echo $paginaActual + 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="next">Siguiente</a>
     <?php endif; ?>
 </div>
 
 
     <div class="add-client">
-        <a href="/PDO_5_MVC/public/index.php?page=admin/admin_nuevo" class="add">Añadir Nuevo Administrador o editor</a>
-        <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard" class="add">Artículos</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=admin/admin_nuevo" class="add">Añadir Nuevo Administrador o editor</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=editor/editor_dashboard" class="add">Artículos</a>
     </div>
 
     <?php

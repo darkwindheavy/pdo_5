@@ -1,4 +1,5 @@
 <?php
+require_once '../app/Controladores/config.php';
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
@@ -48,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if ($mensaje): ?>
             <div class="success-message"><?php echo htmlspecialchars($mensaje); ?></div>
         <?php else: ?>
-            <form action="/PDO_5_MVC/public/index.php?page=auth/restablecer_contrasena&token=<?php echo urlencode($token); ?>" method="post" class="form">
+            <form action="<?php echo BASE_URL; ?>index.php?page=auth/restablecer_contrasena&token=<?php echo urlencode($token); ?>" method="post" class="form">
                 <div class="form-group">
                     <label for="nueva_contrasena">Nueva Contraseña:</label>
                     <input type="password" id="nueva_contrasena" name="nueva_contrasena" required class="form-input">
@@ -65,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <!-- Botón para regresar al login -->
 <div class="back-to-login">
-    <a href="/PDO_5_MVC/public/index.php?page=auth/login" class="btn-secondary">Volver al Inicio de Sesión</a>
+    <a href="<?php echo BASE_URL; ?>index.php?page=auth/login" class="btn-secondary">Volver al Inicio de Sesión</a>
 </div>
 
     </div>

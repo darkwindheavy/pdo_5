@@ -1,5 +1,6 @@
 <?php
 require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../app/Controladores/config.php';
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
@@ -31,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $exito = "Cliente añadido exitosamente.";
 
         // Redirigir si no hay errores
-        header("Location: /PDO_5_MVC/public/index.php?page=clientes/clientes&mensaje=" . urlencode($exito));
+        header("Location: " . BASE_URL . "index.php?page=clientes/clientes&mensaje=" . urlencode($exito));
         exit;
     } catch (Exception $e) {
         $error = "Error al añadir cliente: " . htmlspecialchars($e->getMessage());
@@ -46,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Añadir Nuevo Cliente</title>
-    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/styles.css">
 </head>
 <body>
     <div class="edit-container">
@@ -60,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="exito"><?php echo htmlspecialchars($exito); ?></div>
         <?php endif; ?>
 
-        <form action="/PDO_5_MVC/public/index.php?page=clientes/cliente_nuevo" method="post">
+        <form action="<?php echo BASE_URL; ?>index.php?page=clientes/cliente_nuevo" method="post">
             <div class="form-group">
                 <label for="dni">DNI:</label>
                 <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($dni ?? ''); ?>" required>
@@ -96,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="btn-primary">Añadir Cliente</button>
         </form>
 
-        <a href="/PDO_5_MVC/public/index.php?page=clientes/clientes" class="btn-secondary">Volver a la Lista de Clientes</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=clientes/clientes" class="btn-secondary">Volver a la Lista de Clientes</a>
     </div>
     <?php
     require_once '../views/includes/footer.php'; // Importar el pie de página común

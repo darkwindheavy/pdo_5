@@ -1,5 +1,6 @@
 <?php
 require_once '../app/Controladores/funciones.php'; // Importar funciones reutilizables
+require_once '../app/Controladores/config.php';
 $mostrar_enlaces = false; // No mostrar enlaces en esta páginas
 require_once '../views/includes/header.php';
 require_once '../app/Modelos/BaseDeDatos.php';
@@ -33,13 +34,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Redirigir al panel correspondiente según el rol
                 switch (strtolower($usuarioData['rol'])) {
                     case 'administrador':
-                        header("Location: /PDO_5_MVC/public/index.php?page=admin/admin_dashboard");
+                        header("Location: " . BASE_URL . "index.php?page=admin/admin_dashboard");
                         break;
                     case 'editor':
-                        header("Location: /PDO_5_MVC/public/index.php?page=editor/editor_dashboard");
+                        header("Location: " . BASE_URL . "index.php?page=editor/editor_dashboard");
                         break;
                     default:
-                        header("Location: /PDO_5_MVC/public/index.php?page=misc/zona_privada");
+                        header("Location: " . BASE_URL . "index.php?page=misc/zona_privada");
                         break;
                 }
                 exit;
@@ -76,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
 
-        <form action="/PDO_5_MVC/public/index.php?page=auth/login" method="post">
+        <form action="<?php echo BASE_URL; ?>index.php?page=auth/login" method="post">
             <div class="form-group">
                 <label for="dni">DNI:</label>
                 <input type="text" id="dni" name="dni" required>
@@ -87,8 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <button type="submit" class="btn-primary">Iniciar Sesión</button>
         </form>
-        <a href="/PDO_5_MVC/public/index.php?page=auth/registro" class="btn-secondary">Crear una cuenta</a>
-        <a href="/PDO_5_MVC/public/index.php?page=auth/olvide_contrasena" class="btn-secondary">Olvidé mi contraseña</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=auth/registro" class="btn-secondary">Crear una cuenta</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=auth/olvide_contrasena" class="btn-secondary">Olvidé mi contraseña</a>
     <?php
     require_once '../views/includes/footer.php'; // Importar el pie de página común
     ?>

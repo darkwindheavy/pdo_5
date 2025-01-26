@@ -33,7 +33,7 @@ try {
         // Verificar si el ID a editar no es el del propio administrador logueado
         if ($id === $_SESSION['usuario_id']) {
             $error = "No puedes editar tu propio perfil desde aquí.";
-            header("Location: /PDO_5_MVC/public/index.php?page=admin/admin_list&mensaje=" . urlencode($error));
+            header("Location: " . BASE_URL . "index.php?page=admin/admin_list&mensaje=" . urlencode($error));
             exit;
         }
 
@@ -53,7 +53,7 @@ try {
         $exito = "Administrador actualizado exitosamente.";
 
         // Redirigir a la lista de administradores después de la edición
-        header("Location: /PDO_5_MVC/public/index.php?page=admin/admin_list&mensaje=" . urlencode($exito));
+        header("Location: " . BASE_URL . "index.php?page=admin/admin_list&mensaje=" . urlencode($exito));
         exit;
     }
 } catch (Exception $e) {
@@ -68,7 +68,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Administrador</title>
-    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/styles.css">
 </head>
 <body>
     <div class="edit-container">
@@ -83,7 +83,7 @@ try {
         <?php endif; ?>
 
         <?php if (!empty($admin)): ?>
-            <form action="/PDO_5_MVC/public/index.php?page=admin/editar_admin&id=<?php echo $id; ?>" method="post">
+            <form action="<?php echo BASE_URL; ?>index.php?page=admin/editar_admin&id=<?php echo $id; ?>" method="post">
             <div class="form-group">
                     <label for="dni">Dni:</label>
                     <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($admin['dni']); ?>" required>
@@ -120,7 +120,7 @@ try {
             </form>
         <?php endif; ?>
 
-        <a href="/PDO_5_MVC/public/index.php?page=admin/admin_list" class="btn-secondary">Volver a la Lista de Administradores</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=admin/admin_list" class="btn-secondary">Volver a la Lista de Administradores</a>
     </div>
 
 <?php

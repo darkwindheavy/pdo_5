@@ -1,5 +1,6 @@
 <?php
 require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../app/Controladores/config.php';
 require_once '../views/includes/header.php';
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Articulo.php'; // Importar la clase Usuario
@@ -37,7 +38,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/styles.css">
     <title>Panel de Editor</title>
 </head>
 <body>
@@ -45,7 +46,7 @@ try {
         <h2>Panel del Editor</h2>
 
         <!-- Formulario de búsqueda -->
-        <form action="/PDO_5_MVC/public/index.php" method="get">
+        <form action="<?php echo BASE_URL; ?>index.php" method="get">
             <input type="hidden" name="page" value="editor/editor_dashboard">
             <input type="text" name="buscar" placeholder="Buscar artículo" value="<?php echo htmlspecialchars($busqueda); ?>">
             <button type="submit">Buscar</button>
@@ -65,7 +66,7 @@ try {
             <thead>
                 <tr>
                     <th>
-                        <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard&orden=codigo&direccion=<?php echo ($orden === 'codigo' && $direccion === 'ASC') ? 'DESC' : 'ASC'; ?>&buscar=<?php echo urlencode($busqueda); ?>&pagina=<?php echo $pagina; ?>">
+                        <a href="<?php echo BASE_URL; ?>index.php?page=editor/editor_dashboard&orden=codigo&direccion=<?php echo ($orden === 'codigo' && $direccion === 'ASC') ? 'DESC' : 'ASC'; ?>&buscar=<?php echo urlencode($busqueda); ?>&pagina=<?php echo $pagina; ?>">
                             Código
                             <?php if ($orden === 'codigo'): ?>
                                 <i class="fas fa-arrow-<?php echo $direccion === 'ASC' ? 'up' : 'down'; ?>"></i>
@@ -73,7 +74,7 @@ try {
                         </a>
                     </th>
                     <th>
-                        <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard&orden=nombre&direccion=<?php echo ($orden === 'nombre' && $direccion === 'ASC') ? 'DESC' : 'ASC'; ?>&buscar=<?php echo urlencode($busqueda); ?>&pagina=<?php echo $pagina; ?>">
+                        <a href="<?php echo BASE_URL; ?>index.php?page=editor/editor_dashboard&orden=nombre&direccion=<?php echo ($orden === 'nombre' && $direccion === 'ASC') ? 'DESC' : 'ASC'; ?>&buscar=<?php echo urlencode($busqueda); ?>&pagina=<?php echo $pagina; ?>">
                             Nombre
                             <?php if ($orden === 'nombre'): ?>
                                 <i class="fas fa-arrow-<?php echo $direccion === 'ASC' ? 'up' : 'down'; ?>"></i>
@@ -82,7 +83,7 @@ try {
                     </th>
                     <th>Descripción</th>
                     <th>
-                        <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard&orden=categoria&direccion=<?php echo ($orden === 'categoria' && $direccion === 'ASC') ? 'DESC' : 'ASC'; ?>&buscar=<?php echo urlencode($busqueda); ?>&pagina=<?php echo $pagina; ?>">
+                        <a href="<?php echo BASE_URL; ?>index.php?page=editor/editor_dashboard&orden=categoria&direccion=<?php echo ($orden === 'categoria' && $direccion === 'ASC') ? 'DESC' : 'ASC'; ?>&buscar=<?php echo urlencode($busqueda); ?>&pagina=<?php echo $pagina; ?>">
                             Categoría
                             <?php if ($orden === 'categoria'): ?>
                                 <i class="fas fa-arrow-<?php echo $direccion === 'ASC' ? 'up' : 'down'; ?>"></i>
@@ -90,7 +91,7 @@ try {
                         </a>
                     </th>
                     <th>
-                        <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard&orden=precio&direccion=<?php echo ($orden === 'precio' && $direccion === 'ASC') ? 'DESC' : 'ASC'; ?>&buscar=<?php echo urlencode($busqueda); ?>&pagina=<?php echo $pagina; ?>">
+                        <a href="<?php echo BASE_URL; ?>index.php?page=editor/editor_dashboard&orden=precio&direccion=<?php echo ($orden === 'precio' && $direccion === 'ASC') ? 'DESC' : 'ASC'; ?>&buscar=<?php echo urlencode($busqueda); ?>&pagina=<?php echo $pagina; ?>">
                             Precio
                             <?php if ($orden === 'precio'): ?>
                                 <i class="fas fa-arrow-<?php echo $direccion === 'ASC' ? 'up' : 'down'; ?>"></i>
@@ -111,15 +112,15 @@ try {
                             <td><?php echo htmlspecialchars($articulo['categoria']); ?></td>
                             <td><?php echo htmlspecialchars($articulo['precio']); ?></td>
                             <td>
-                                <img src="/PDO_5_MVC/public/uploads/articulos/<?php echo htmlspecialchars($articulo['imagen']); ?>" 
+                                <img src="<?php echo BASE_URL; ?>uploads/articulos/<?php echo htmlspecialchars($articulo['imagen']); ?>" 
                                 class="table-img" 
                                 alt="Imagen del Artículo"
                                 data-enlargeable>
                             </td>
                             <td class="actions">
                                 <div class="actions-container">
-                                    <a href="/PDO_5_MVC/public/index.php?page=articulos/editar_articulo&id=<?php echo urlencode($articulo['id']); ?>" class="editar">Editar</a>
-                                    <a href="/PDO_5_MVC/public/index.php?page=articulos/borrar_articulo&id=<?php echo urlencode($articulo['id']); ?>" class="borrar" onclick="return confirm('¿Está seguro de que desea eliminar este artículo?');">Eliminar</a>
+                                    <a href="<?php echo BASE_URL; ?>index.php?page=articulos/editar_articulo&id=<?php echo urlencode($articulo['id']); ?>" class="editar">Editar</a>
+                                    <a href="<?php echo BASE_URL; ?>index.php?page=articulos/borrar_articulo&id=<?php echo urlencode($articulo['id']); ?>" class="borrar" onclick="return confirm('¿Está seguro de que desea eliminar este artículo?');">Eliminar</a>
                                 </div>
                             </td>
                         </tr>
@@ -135,29 +136,29 @@ try {
         <!-- Paginación -->
         <div class="paginacion">
             <?php if ($pagina > 1): ?>
-                <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard&pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="btn btn-anterior">
+                <a href="<?php echo BASE_URL; ?>index.php?page=editor/editor_dashboard&pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="btn btn-anterior">
                     <i class="fas fa-chevron-left"></i> Anterior
                 </a>
             <?php endif; ?>
 
             <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-                <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard&pagina=<?php echo $i; ?>&busqueda=<?php echo urlencode($busqueda); ?>" 
+                <a href="<?php echo BASE_URL; ?>index.php?page=editor/editor_dashboard&pagina=<?php echo $i; ?>&busqueda=<?php echo urlencode($busqueda); ?>" 
                     class="btn <?php echo $i == $pagina ? 'activo' : ''; ?>">
                     <?php echo $i; ?>
                 </a>
             <?php endfor; ?>
 
             <?php if ($pagina < $totalPaginas): ?>
-                <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard&pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="btn btn-siguiente">
+                <a href="<?php echo BASE_URL; ?>index.php?page=editor/editor_dashboard&pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="btn btn-siguiente">
                     Siguiente <i class="fas fa-chevron-right"></i>
                 </a>
             <?php endif; ?>
         </div>
 
         <div class="button-container">
-            <a href="/PDO_5_MVC/public/index.php?page=articulos/alta_articulo" class="btn-primary center-button">Añadir Nuevo Artículo</a>
+            <a href="<?php echo BASE_URL; ?>index.php?page=articulos/alta_articulo" class="btn-primary center-button">Añadir Nuevo Artículo</a>
             <?php if ($_SESSION['usuario_rol'] !== 'administrador'): ?>
-                <a href="/PDO_5_MVC/public/index.php?page=usuarios/editar_editor" class="editar-datos">Editar Mis Datos</a>
+                <a href="<?php echo BASE_URL; ?>index.php?page=usuarios/editar_editor" class="editar-datos">Editar Mis Datos</a>
             <?php endif; ?>
 
         </div>
@@ -167,7 +168,7 @@ try {
     require_once '../views/includes/footer.php'; // Importar el pie de página común
     ?>
     
-    <script src="/PDO_5_MVC/public/js/script.js"></script>
+    <script src="<?php echo BASE_URL; ?>js/script.js"></script>
 
 </body>
 </html>

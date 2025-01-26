@@ -3,6 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require '../vendor/autoload.php'; // Carga las dependencias instaladas por Composer
+require_once '../app/Controladores/config.php';
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
@@ -29,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Configurar PHPMailer
             $mail = new PHPMailer(true);
-            $enlace = "http://localhost/PDO_5_MVC/public/index.php?page=auth/restablecer_contrasena&token=" . urlencode($token);
+            $enlace = "http://localhost<?php echo BASE_URL; ?>index.php?page=auth/restablecer_contrasena&token=" . urlencode($token);
 
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com'; // Servidor SMTP
@@ -64,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Olvidé mi Contraseña</title>
-    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/styles.css">
 </head>
 <body>
     <div class="container">
@@ -78,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="success-message"><?php echo htmlspecialchars($mensaje); ?></div>
         <?php endif; ?>
 
-        <form action="/PDO_5_MVC/public/index.php?page=auth/olvide_contrasena" method="post" class="form">
+        <form action="<?php echo BASE_URL; ?>index.php?page=auth/olvide_contrasena" method="post" class="form">
             <div class="form-group">
                 <label for="dni">DNI:</label>
                 <input type="text" id="dni" name="dni" required class="form-input">
@@ -93,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
 
         <div class="back-to-login">
-            <a href="/PDO_5_MVC/public/index.php?page=auth/login" class="btn-secondary">Volver al Inicio de Sesión</a>
+            <a href="<?php echo BASE_URL; ?>index.php?page=auth/login" class="btn-secondary">Volver al Inicio de Sesión</a>
         </div>
     </div>
 </body>

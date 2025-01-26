@@ -1,5 +1,6 @@
 <?php
 require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../app/Controladores/config.php';
 require_once '../views/includes/header.php';
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
@@ -28,7 +29,7 @@ try {
             // Eliminar cliente
             $usuario->eliminarUsuario($id);
             $exito = "Cliente eliminado exitosamente.";
-            header("Location: /PDO_5_MVC/public/index.php?page=clientes/clientes&mensaje=" . urlencode($exito));
+            header("Location: " . BASE_URL . "index.php?page=clientes/clientes&mensaje=" . urlencode($exito));
             exit;
         } else {
             // Actualizar cliente
@@ -43,7 +44,7 @@ try {
 
             $usuario->editarUsuario($id, $dni, $nombre, $correo, $telefono, $direccion, $localidad, $provincia, 'usuario', $contrasena);
             $exito = "Cliente actualizado exitosamente.";
-            header("Location: /PDO_5_MVC/public/index.php?page=clientes/clientes&mensaje=" . urlencode($exito));
+            header("Location: " . BASE_URL . "index.php?page=clientes/clientes&mensaje=" . urlencode($exito));
             exit;
         }
     }
@@ -58,7 +59,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Cliente</title>
-    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
+    <link rel="s<?php echo BASE_URL; ?>css/styles.css">
 </head>
 <body>
     <div class="edit-container">
@@ -73,7 +74,7 @@ try {
         <?php endif; ?>
 
         <?php if (!empty($cliente)): ?>
-            <form action="/PDO_5_MVC/public/index.php?page=clientes/editar_cliente&id=<?php echo $id; ?>" method="post">
+            <form action="<?php echo BASE_URL; ?>index.php?page=clientes/editar_cliente&id=<?php echo $id; ?>" method="post">
                 <div class="form-group">
                     <label for="dni">DNI:</label>
                     <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($cliente['dni']); ?>" required>
@@ -111,7 +112,7 @@ try {
             </form>
         <?php endif; ?>
 
-        <a href="/PDO_5_MVC/public/index.php?page=clientes/clientes" class="btn-secondary">Volver a la Lista de Clientes</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=clientes/clientes" class="btn-secondary">Volver a la Lista de Clientes</a>
     </div>
 
     <?php require_once '../views/includes/footer.php'; ?>

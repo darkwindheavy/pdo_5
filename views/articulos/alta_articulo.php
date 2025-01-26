@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $articulo->crearArticulo($codigo, $nombre, $descripcion, $categoria, $precio, $nuevoNombre);
 
         // Redirigir con mensaje de éxito
-        header("Location: /PDO_5_MVC/public/index.php?page=editor/editor_dashboard&mensaje=" . urlencode("Artículo registrado exitosamente."));
+        header("Location: " . BASE_URL . "index.php?page=editor/editor_dashboard&mensaje=" . urlencode("Artículo registrado exitosamente."));
         exit;
     } catch (Exception $e) {
         $error = $e->getMessage();
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/styles.css">
     <title>Alta de Artículo</title>
 </head>
 <body>
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="exito"><?php echo htmlspecialchars($exito); ?></div>
         <?php endif; ?>
 
-        <form action="/PDO_5_MVC/public/index.php?page=articulos/alta_articulo" method="post" enctype="multipart/form-data">
+        <form action="<?php echo BASE_URL; ?>index.php?page=articulos/alta_articulo" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="codigo">Código:</label>
                 <input type="text" id="codigo" name="codigo" required pattern="[a-zA-Z]{3}[0-9]{1,5}" placeholder="Tres letras seguidas de hasta cinco números">
@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <button type="submit" class="btn-primary">Registrar Artículo</button>
         </form>
-        <a href="/PDO_5_MVC/public/index.php?page=editor/editor_dashboard" class="btn-secondary">Volver</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=editor/editor_dashboard" class="btn-secondary">Volver</a>
     </div>
 
     <?php

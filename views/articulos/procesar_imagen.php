@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Generar un nombre único para evitar colisiones
                 $nuevoNombre = uniqid() . '_' . basename($fileName);
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/PDO_5_MVC/public/uploads/images/';;
+                $uploadDir = BASE_DIR . 'public/uploads/images/';;
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo '<p>Imagen subida exitosamente.</p>';
                 echo '<div class="button-container">';
                 echo '<a href="' . $uploadPath . '" target="_blank" class="btn-primary">Ver Imagen</a>';
-                echo '<a href="/PDO_5_MVC/public/index.php?page=misc/subir_imagen" class="btn-secondary">Subir Otra Imagen</a>';
+                echo '<a href="<?php echo BASE_URL; ?>index.php?page=misc/subir_imagen" class="btn-secondary">Subir Otra Imagen</a>';
                 echo '</div>';
                 echo '</div>';
 

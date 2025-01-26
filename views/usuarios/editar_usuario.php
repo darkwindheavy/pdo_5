@@ -1,11 +1,12 @@
 <?php
 require_once '../app/Controladores/funciones.php'; // Importar funciones reutilizables
+require_once '../app/Controladores/config.php';
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
 // Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: /PDO_5_MVC/public/index.php?page=auth/login");
+    header("Location: " . BASE_URL . "index.php?page=auth/login");
     exit;
 }
 
@@ -40,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($error)) {
             // Mensaje de éxito y redirección al login
             echo '<script>
                     alert("Cuenta eliminada exitosamente. Serás redirigido al inicio de sesión.");
-                    window.location.href = "/PDO_5_MVC/public/index.php?page=auth/login";
+                    window.<?php echo BASE_URL; ?>index.php?page=auth/login";
                   </script>';
             exit;
         } catch (Exception $e) {
@@ -62,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($error)) {
             $exito = "Datos del usuario actualizados exitosamente.";
 
             // Redirigir a la zona privada
-            header("Location: /PDO_5_MVC/public/index.php?page=misc/zona_privada&mensaje=" . urlencode($exito));
+            header("Location: " . BASE_URL . "index.php?page=misc/zona_privada&mensaje=" . urlencode($exito));
             exit;
         } catch (Exception $e) {
             $error = $e->getMessage();
@@ -77,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($error)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuario</title>
-    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/styles.css">
 </head>
 <body>
     <div class="edit-container">
@@ -91,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($error)) {
         <?php endif; ?>
 
         <?php if (!empty($datos_usuario)): ?>
-            <form action="/PDO_5_MVC/public/index.php?page=usuarios/editar_usuario" method="post">
+            <form action="<?php echo BASE_URL; ?>index.php?page=usuarios/editar_usuario" method="post">
                 <div class="form-group">
                     <label for="dni">DNI:</label>
                     <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required>
@@ -129,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && empty($error)) {
             </form>
         <?php endif; ?>
 
-        <a href="/PDO_5_MVC/public/index.php?page=misc/zona_privada" class="btn-secondary">Volver a la Zona Privada</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=misc/zona_privada" class="btn-secondary">Volver a la Zona Privada</a>
     </div>
     <?php require_once '../views/includes/footer.php'; ?>
 </body>

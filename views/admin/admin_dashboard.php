@@ -28,9 +28,9 @@ $usuario = new Usuario($db);
         <h2>Panel de Administrador</h2>
         <h2>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></h2>
         <div class="button-container">
-            <a href="/PDO_5_MVC/public/index.php?page=clientes/clientes" class="btn-dashboard">Gestionar Clientes</a>
-            <a href="/PDO_5_MVC/public/index.php?page=admin/admin_list" class="btn-dashboard">Gestionar Administradores</a>
-            <a href="/PDO_5_MVC/public/index.php?page=auth/logout" class="btn-dashboard logout">Cerrar Sesión</a>
+            <a href="<?php echo BASE_URL; ?>index.php?page=clientes/clientes" class="btn-dashboard">Gestionar Clientes</a>
+            <a href="<?php echo BASE_URL; ?>index.php?page=admin/admin_list" class="btn-dashboard">Gestionar Administradores</a>
+            <a href="<?php echo BASE_URL; ?>index.php?page=auth/logout" class="btn-dashboard logout">Cerrar Sesión</a>
         </div>
     </div>
     <?php

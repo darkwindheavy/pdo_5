@@ -1,5 +1,6 @@
 <?php
 require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../app/Controladores/config.php';
 require_once '../views/includes/header.php'; // Importar la cabecera
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
@@ -39,13 +40,13 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuarios</title>
-    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
+    <link rel="s<?php echo BASE_URL; ?>css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <h2>Lista de Usuarios</h2>
 
-<form action="/PDO_5_MVC/public/index.php" method="get">
+<form action="<?php echo BASE_URL; ?>index.php" method="get">
     <input type="hidden" name="page" value="clientes/clientes">
     <input type="text" name="busqueda" placeholder="Buscar usuario" value="<?php echo htmlspecialchars($busqueda); ?>">
     <button type="submit">Buscar</button>
@@ -64,7 +65,7 @@ try {
     <thead>
         <tr>
         <th>
-                <a href="/PDO_5_MVC/public/index.php?page=clientes/clientes&orden=<?php echo ($orden === 'ASC') ? 'DESC' : 'ASC'; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="ordenar">
+                <a href="<?php echo BASE_URL; ?>index.php?page=clientes/clientes&orden=<?php echo ($orden === 'ASC') ? 'DESC' : 'ASC'; ?>&busqueda=<?php echo urlencode($busqueda); ?>" class="ordenar">
                 Nombre
                         <?php if ($orden === 'ASC'): ?>
                             <i class="fas fa-arrow-up"></i>
@@ -94,9 +95,9 @@ try {
                     <td><?php echo htmlspecialchars($usuario['localidad']); ?></td>
                     <td><?php echo htmlspecialchars($usuario['provincia']); ?></td>
                     <td class="actions">
-                        <a href="/PDO_5_MVC/public/index.php?page=clientes/editar_cliente&id=<?php echo $usuario['id']; ?>" class="editar">Editar</a>
+                        <a href="<?php echo BASE_URL; ?>index.php?page=clientes/editar_cliente&id=<?php echo $usuario['id']; ?>" class="editar">Editar</a>
                         <?php if ($_SESSION['usuario_id'] !== $usuario['id']): ?>
-                            <a href="/PDO_5_MVC/public/index.php?page=clientes/borrar_cliente&id=<?php echo $usuario['id']; ?>" class="borrar" onclick="return confirm('¿Está seguro de que desea eliminar este usuario?');">Eliminar</a>
+                            <a href="<?php echo BASE_URL; ?>index.php?page=clientes/borrar_cliente&id=<?php echo $usuario['id']; ?>" class="borrar" onclick="return confirm('¿Está seguro de que desea eliminar este usuario?');">Eliminar</a>
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -111,22 +112,22 @@ try {
 
 <div class="paginacion">
     <?php if ($paginaActual > 1): ?>
-        <a href="/PDO_5_MVC/public/index.php?page=clientes/clientes&pagina=<?php echo $paginaActual - 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="prev">Anterior</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=clientes/clientes&pagina=<?php echo $paginaActual - 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="prev">Anterior</a>
     <?php endif; ?>
 
     <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-        <a href="/PDO_5_MVC/public/index.php?page=clientes/clientes&pagina=<?php echo $i; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="<?php echo ($i === $paginaActual) ? 'active' : ''; ?>">
+        <a href="<?php echo BASE_URL; ?>index.php?page=clientes/clientes&pagina=<?php echo $i; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="<?php echo ($i === $paginaActual) ? 'active' : ''; ?>">
             <?php echo $i; ?>
         </a>
     <?php endfor; ?>
 
     <?php if ($paginaActual < $totalPaginas): ?>
-        <a href="/PDO_5_MVC/public/index.php?page=clientes/clientes&pagina=<?php echo $paginaActual + 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="next">Siguiente</a>
+        <a href="<?php echo BASE_URL; ?>index.php?page=clientes/clientes&pagina=<?php echo $paginaActual + 1; ?>&busqueda=<?php echo urlencode($busqueda); ?>&orden=<?php echo $orden; ?>" class="next">Siguiente</a>
     <?php endif; ?>
 </div>
 
 <div class="add-client">
-    <a href="/PDO_5_MVC/public/index.php?page=clientes/cliente_nuevo" class="add">Añadir Nuevo Usuario</a>
+    <a href="<?php echo BASE_URL; ?>index.php?page=clientes/cliente_nuevo" class="add">Añadir Nuevo Usuario</a>
 </div>
 
 <?php

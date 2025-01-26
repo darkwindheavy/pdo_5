@@ -1,5 +1,6 @@
 <?php
 require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../app/Controladores/config.php';
 require_once '../app/Modelos/BaseDeDatos.php'; // Base de datos
 require_once '../app/Modelos/Usuario.php'; // Clase Usuario
 
@@ -25,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usuario->crearUsuario($dni, $nombre, $correo, $telefono, $direccion, $localidad, $provincia, 'usuario', $contrasena);
         
         // Redirigir al login con éxito
-        header("Location: /PDO_5_MVC/public/index.php?page=auth/login&mensaje=" . urlencode("Registro exitoso. Ahora puedes iniciar sesión."));
+        header("Location: " . BASE_URL . "index.php?page=auth/login&mensaje=" . urlencode("Registro exitoso. Ahora puedes iniciar sesión."));
         exit;
 
     } catch (Exception $e) {
@@ -39,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/PDO_5_MVC/public/css/styles.css">
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>css/styles.css">
     <title>Registro de Usuario</title>
 </head>
 <body>
@@ -47,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>Registro de Usuario</h1>
         <nav class="navbar">
             <ul>
-                <li><a href="/PDO_5_MVC/public/index.php?page=auth/login" class="nav-button">Inicio</a></li>
+                <li><a href="<?php echo BASE_URL; ?>index.php?page=auth/login" class="nav-button">Inicio</a></li>
             </ul>
         </nav>
     </header>
@@ -59,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="error"><?php echo htmlspecialchars($error); ?></div>
         <?php endif; ?>
 
-        <form action="/PDO_5_MVC/public/index.php?page=auth/registro" method="post">
+        <form action="<?php echo BASE_URL; ?>index.php?page=auth/registro" method="post">
             <div>
                 <label for="dni">DNI:</label>
                 <input type="text" id="dni" name="dni" required>
@@ -96,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
 
         <div class="login-link">
-            <p>¿Ya tienes una cuenta? <a href="/PDO_5_MVC/public/index.php?page=auth/login" class="btn-secondary">Inicia sesión aquí</a></p>
+            <p>¿Ya tienes una cuenta? <a href="<?php echo BASE_URL; ?>index.php?page=auth/login" class="btn-secondary">Inicia sesión aquí</a></p>
         </div>
     </div>
 

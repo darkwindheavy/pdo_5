@@ -3,6 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once '../app/Controladores/funciones.php'; // Importar funciones
+require_once '../app/Controladores/config.php';
 require_once '../app/Modelos/BaseDeDatos.php';
 require_once '../app/Modelos/Usuario.php'; // Importar la clase Usuario
 
@@ -30,7 +31,7 @@ try {
 
         if ($resultado) {
             // Redirigir al usuario de nuevo a la lista de clientes con un mensaje de éxito
-            header("Location: /PDO_5_MVC/public/index.php?page=clientes/clientes&mensaje=Cliente eliminado exitosamente");
+            header("Location: " . BASE_URL . "index.php?page=clientes/clientes&mensaje=Cliente eliminado exitosamente");
             exit;
         } else {
             manejar_error("No se pudo eliminar el cliente. Es posible que no exista.");
